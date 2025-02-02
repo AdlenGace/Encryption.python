@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>adlen.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+adlen.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">tkinter </span><span class="s0">import </span><span class="s1">*</span>
+<span class="s0">from </span><span class="s1">tkinter </span><span class="s0">import </span><span class="s1">messagebox</span>
+<span class="s0">import </span><span class="s1">base64</span>
+<span class="s0">import </span><span class="s1">os</span>
+
+<span class="s0">def </span><span class="s1">decrypt():</span>
+    <span class="s1">password = code.get()</span>
+
+    <span class="s0">if </span><span class="s1">password == </span><span class="s2">&quot;1234&quot;</span><span class="s1">:</span>
+        <span class="s1">screen2 = Toplevel(screen)</span>
+        <span class="s1">screen2.title(</span><span class="s2">&quot;decryption&quot;</span><span class="s1">)</span>
+        <span class="s1">screen2.geometry(</span><span class="s2">&quot;400x200&quot;</span><span class="s1">)</span>
+        <span class="s1">screen2.configure(bg=</span><span class="s2">&quot;#00bd56&quot;</span><span class="s1">)</span>
+
+        <span class="s1">message = text1.get(</span><span class="s3">1.0</span><span class="s0">, </span><span class="s1">END)</span>
+        <span class="s1">decode_message = message.encode(</span><span class="s2">&quot;ascii&quot;</span><span class="s1">)</span>
+        <span class="s1">base64_bytes = base64.b64decode(decode_message)</span>
+        <span class="s1">decrypt = base64_bytes.decode(</span><span class="s2">&quot;ascii&quot;</span><span class="s1">)</span>
+
+        <span class="s1">Label(screen2</span><span class="s0">, </span><span class="s1">text=</span><span class="s2">&quot;Decrypt&quot;</span><span class="s0">, </span><span class="s1">font=</span><span class="s2">&quot;arial&quot;</span><span class="s0">, </span><span class="s1">fg=</span><span class="s2">&quot;white&quot;</span><span class="s0">, </span><span class="s1">bg=</span><span class="s2">&quot;#00bd56&quot;</span><span class="s1">).place(x=</span><span class="s3">10</span><span class="s0">, </span><span class="s1">y=</span><span class="s3">0</span><span class="s1">)</span>
+        <span class="s1">text2 = Text(screen2</span><span class="s0">, </span><span class="s1">font=</span><span class="s2">&quot;Rpbote 10&quot;</span><span class="s0">, </span><span class="s1">bg=</span><span class="s2">&quot;white&quot;</span><span class="s0">, </span><span class="s1">relief=GROOVE</span><span class="s0">, </span><span class="s1">wrap=WORD</span><span class="s0">, </span><span class="s1">bd=</span><span class="s3">0</span><span class="s1">)</span>
+        <span class="s1">text2.place(x=</span><span class="s3">10</span><span class="s0">, </span><span class="s1">y=</span><span class="s3">40</span><span class="s0">, </span><span class="s1">width=</span><span class="s3">380</span><span class="s0">, </span><span class="s1">height=</span><span class="s3">150</span><span class="s1">)</span>
+
+        <span class="s1">text2.insert(END</span><span class="s0">, </span><span class="s1">decrypt)</span>
+
+    <span class="s0">elif </span><span class="s1">password == </span><span class="s2">&quot;&quot;</span><span class="s1">:</span>
+        <span class="s1">messagebox.showerror(</span><span class="s2">&quot;encryption&quot;</span><span class="s0">, </span><span class="s2">&quot;Input Password&quot;</span><span class="s1">)</span>
+    <span class="s0">elif </span><span class="s1">password != </span><span class="s2">&quot;1234&quot;</span><span class="s1">:</span>
+        <span class="s1">messagebox.showerror(</span><span class="s2">&quot;encryption&quot;</span><span class="s0">, </span><span class="s2">&quot;invalid passowrd&quot;</span><span class="s1">)</span>
+
+<span class="s0">def </span><span class="s1">encrypt():</span>
+    <span class="s1">password = code.get()</span>
+
+    <span class="s0">if </span><span class="s1">password==</span><span class="s2">&quot;1234&quot;</span><span class="s1">:</span>
+        <span class="s1">screen1=Toplevel(screen)</span>
+        <span class="s1">screen1.title(</span><span class="s2">&quot;encryption&quot;</span><span class="s1">)</span>
+        <span class="s1">screen1.geometry(</span><span class="s2">&quot;400x200&quot;</span><span class="s1">)</span>
+        <span class="s1">screen1.configure(bg=</span><span class="s2">&quot;#ed3833&quot;</span><span class="s1">)</span>
+
+        <span class="s1">message=text1.get(</span><span class="s3">1.0</span><span class="s0">,</span><span class="s1">END)</span>
+        <span class="s1">encode_message=message.encode(</span><span class="s2">&quot;ascii&quot;</span><span class="s1">)</span>
+        <span class="s1">base64_bytes=base64.b64encode(encode_message)</span>
+        <span class="s1">encrypt=base64_bytes.decode(</span><span class="s2">&quot;ascii&quot;</span><span class="s1">)</span>
+
+        <span class="s1">Label(screen1</span><span class="s0">,</span><span class="s1">text=</span><span class="s2">&quot;Encrypt&quot;</span><span class="s0">,</span><span class="s1">font=</span><span class="s2">&quot;arial&quot;</span><span class="s0">,</span><span class="s1">fg=</span><span class="s2">&quot;white&quot;</span><span class="s0">,</span><span class="s1">bg=</span><span class="s2">&quot;#ed3833&quot;</span><span class="s1">).place(x=</span><span class="s3">10</span><span class="s0">,</span><span class="s1">y=</span><span class="s3">0</span><span class="s1">)</span>
+        <span class="s1">text2=Text(screen1</span><span class="s0">,</span><span class="s1">font=</span><span class="s2">&quot;Rpbote 10&quot;</span><span class="s0">, </span><span class="s1">bg=</span><span class="s2">&quot;white&quot;</span><span class="s0">,</span><span class="s1">relief=GROOVE</span><span class="s0">,</span><span class="s1">wrap=WORD</span><span class="s0">,</span><span class="s1">bd=</span><span class="s3">0</span><span class="s1">)</span>
+        <span class="s1">text2.place(x=</span><span class="s3">10</span><span class="s0">,</span><span class="s1">y=</span><span class="s3">40</span><span class="s0">,</span><span class="s1">width=</span><span class="s3">380</span><span class="s0">,</span><span class="s1">height=</span><span class="s3">150</span><span class="s1">)</span>
+
+        <span class="s1">text2.insert(END</span><span class="s0">,</span><span class="s1">encrypt)</span>
+
+    <span class="s0">elif </span><span class="s1">password==</span><span class="s2">&quot;&quot;</span><span class="s1">:</span>
+        <span class="s1">messagebox.showerror(</span><span class="s2">&quot;encryption&quot;</span><span class="s0">,</span><span class="s2">&quot;Input Password&quot;</span><span class="s1">)</span>
+    <span class="s0">elif </span><span class="s1">password!=</span><span class="s2">&quot;1234&quot;</span><span class="s1">:</span>
+        <span class="s1">messagebox.showerror(</span><span class="s2">&quot;encryption&quot;</span><span class="s0">,</span><span class="s2">&quot;invalid passowrd&quot;</span><span class="s1">)</span>
+
+
+<span class="s0">def </span><span class="s1">main_screen():</span>
+
+    <span class="s0">global </span><span class="s1">screen</span>
+    <span class="s0">global </span><span class="s1">code</span>
+    <span class="s0">global </span><span class="s1">text1</span>
+    <span class="s1">screen = Tk()</span>
+    <span class="s1">screen.geometry(</span><span class="s2">&quot;375x398&quot;</span><span class="s1">)</span>
+
+    <span class="s0">def </span><span class="s1">reset():</span>
+        <span class="s1">code.set(</span><span class="s2">&quot;&quot;</span><span class="s1">)</span>
+        <span class="s1">text1.delete(</span><span class="s3">1.0</span><span class="s0">,</span><span class="s1">END)</span>
+
+    <span class="s1">screen.title(</span><span class="s2">&quot;PctApp&quot;</span><span class="s1">)</span>
+    <span class="s1">Label(text=</span><span class="s2">&quot;Enter text for encryption and decryption&quot;</span><span class="s0">, </span><span class="s1">fg=</span><span class="s2">&quot;black&quot;</span><span class="s0">,</span><span class="s1">font=(</span><span class="s2">&quot;calibri&quot;</span><span class="s0">,</span><span class="s3">13</span><span class="s1">)).place(x=</span><span class="s3">10</span><span class="s0">,</span><span class="s1">y=</span><span class="s3">10</span><span class="s1">)</span>
+    <span class="s1">text1=Text(font=</span><span class="s2">&quot;Robte 20&quot;</span><span class="s0">,</span><span class="s1">bg=</span><span class="s2">&quot;white&quot;</span><span class="s0">,</span><span class="s1">relief=GROOVE</span><span class="s0">,</span><span class="s1">wrap=WORD</span><span class="s0">,</span><span class="s1">bd=</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s1">text1.place(x=</span><span class="s3">10</span><span class="s0">,</span><span class="s1">y=</span><span class="s3">50</span><span class="s0">,</span><span class="s1">width=</span><span class="s3">355</span><span class="s0">,</span><span class="s1">height=</span><span class="s3">100</span><span class="s1">)</span>
+
+    <span class="s1">Label(text=</span><span class="s2">&quot;Enter secret key for encryption and decryption&quot;</span><span class="s0">, </span><span class="s1">fg=</span><span class="s2">&quot;black&quot;</span><span class="s0">,</span><span class="s1">font=(</span><span class="s2">&quot;calibri&quot;</span><span class="s0">,</span><span class="s3">13</span><span class="s1">)).place(x=</span><span class="s3">10</span><span class="s0">,</span><span class="s1">y=</span><span class="s3">170</span><span class="s1">)</span>
+
+    <span class="s1">code=StringVar()</span>
+    <span class="s1">Entry(textvariable=code</span><span class="s0">,</span><span class="s1">width=</span><span class="s3">19</span><span class="s0">,</span><span class="s1">bd=</span><span class="s3">0</span><span class="s0">,</span><span class="s1">font=(</span><span class="s2">&quot;arial&quot;</span><span class="s0">,</span><span class="s3">25</span><span class="s1">)</span><span class="s0">,</span><span class="s1">show=</span><span class="s2">&quot;*&quot;</span><span class="s1">).place(x=</span><span class="s3">10</span><span class="s0">,</span><span class="s1">y=</span><span class="s3">200</span><span class="s1">)</span>
+
+    <span class="s1">Button(text=</span><span class="s2">&quot;Enrypt&quot;</span><span class="s0">,</span><span class="s1">height=</span><span class="s2">&quot;2&quot;</span><span class="s0">,</span><span class="s1">width=</span><span class="s3">23</span><span class="s0">,</span><span class="s1">bg=</span><span class="s2">&quot;#ed3833&quot;</span><span class="s0">,</span><span class="s1">fg=</span><span class="s2">&quot;white&quot;</span><span class="s0">,</span><span class="s1">bd=</span><span class="s3">0</span><span class="s0">,</span><span class="s1">command=encrypt).place(x=</span><span class="s3">10</span><span class="s0">,</span><span class="s1">y=</span><span class="s3">250</span><span class="s1">)</span>
+    <span class="s1">Button(text=</span><span class="s2">&quot;Decrypt&quot;</span><span class="s0">, </span><span class="s1">height=</span><span class="s2">&quot;2&quot;</span><span class="s0">, </span><span class="s1">width=</span><span class="s3">23</span><span class="s0">, </span><span class="s1">bg=</span><span class="s2">&quot;#00bd56&quot;</span><span class="s0">, </span><span class="s1">fg=</span><span class="s2">&quot;white&quot;</span><span class="s0">, </span><span class="s1">bd=</span><span class="s3">0</span><span class="s0">,</span><span class="s1">command=decrypt).place(x=</span><span class="s3">200</span><span class="s0">, </span><span class="s1">y=</span><span class="s3">250</span><span class="s1">)</span>
+    <span class="s1">Button(text=</span><span class="s2">&quot;Reset&quot;</span><span class="s0">, </span><span class="s1">height=</span><span class="s2">&quot;2&quot;</span><span class="s0">, </span><span class="s1">width=</span><span class="s3">50</span><span class="s0">, </span><span class="s1">bg=</span><span class="s2">&quot;#1089ff&quot;</span><span class="s0">, </span><span class="s1">fg=</span><span class="s2">&quot;white&quot;</span><span class="s0">, </span><span class="s1">bd=</span><span class="s3">0</span><span class="s0">,</span><span class="s1">command=reset).place(x=</span><span class="s3">10</span><span class="s0">, </span><span class="s1">y=</span><span class="s3">300</span><span class="s1">)</span>
+
+
+    <span class="s1">screen.mainloop()</span>
+
+<span class="s1">main_screen()</span></pre>
+</body>
+</html>
